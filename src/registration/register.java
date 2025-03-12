@@ -6,7 +6,12 @@
 package registration;
 
 import ADMIN.Admin;
+import ADMIN.AdminD;
+import config.dbConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import login.login;
 
 /**
  *
@@ -20,7 +25,16 @@ public class register extends javax.swing.JFrame {
     public register() {
         initComponents();
     }
-
+public static boolean registration(String username, String password){
+       dbConnector connector = new dbConnector();
+       try{ 
+           String query = "SELECT * FROM tbl_user WHERE u_usern= '" + username + "'AND u_passw = '"+ password +"' ";
+           ResultSet resultSet=connector.getData(query);
+           return resultSet.next();
+       }catch(SQLException ex){
+       return false;
+   }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,7 +50,7 @@ public class register extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        name = new javax.swing.JTextField();
+        lname = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -45,7 +59,6 @@ public class register extends javax.swing.JFrame {
         address = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        lname = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         mi = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -61,6 +74,7 @@ public class register extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         pass = new javax.swing.JPasswordField();
         jLabel16 = new javax.swing.JLabel();
+        fname = new javax.swing.JTextField();
         user4 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,12 +114,12 @@ public class register extends javax.swing.JFrame {
         jLabel4.setText("PLACE OF BIRTH");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 204, -1, -1));
 
-        name.addActionListener(new java.awt.event.ActionListener() {
+        lname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameActionPerformed(evt);
+                lnameActionPerformed(evt);
             }
         });
-        jPanel3.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 100, -1));
+        jPanel3.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 140, -1));
 
         jLabel5.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 10)); // NOI18N
         jLabel5.setText("ADDRESS");
@@ -118,7 +132,7 @@ public class register extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 120, -1));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 120, -1));
 
         jLabel3.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         jLabel3.setText("Register");
@@ -140,7 +154,7 @@ public class register extends javax.swing.JFrame {
         jPanel3.add(panel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 312, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 10)); // NOI18N
-        jLabel7.setText("NAME");
+        jLabel7.setText("FIRST NAME");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         address.addActionListener(new java.awt.event.ActionListener() {
@@ -157,13 +171,6 @@ public class register extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 10)); // NOI18N
         jLabel9.setText("EMAIL");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
-
-        lname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lnameActionPerformed(evt);
-            }
-        });
-        jPanel3.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 129, 20));
 
         jLabel10.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 10)); // NOI18N
         jLabel10.setText("M.I");
@@ -248,7 +255,14 @@ public class register extends javax.swing.JFrame {
         jLabel16.setText("USERNAME");
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 360, 450));
+        fname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fnameActionPerformed(evt);
+            }
+        });
+        jPanel3.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 100, -1));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 360, 450));
 
         user4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,28 +315,29 @@ public class register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_miActionPerformed
 
-    private void lnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lnameActionPerformed
-
     private void addressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addressActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        if(register(name.getText(), lname.getText())){
-            JOptionPane.showMessageDialog(null, "Login Success!");
-            Admin ads = new Admin();
-            ads.setVIsible(true);
-        }else{
-            JOptionPane.showMessageDialog(null,"Login Failed!");
+        dbConnector dbc = new dbConnector();
+        if( dbc.insertData( "INSERT INTO tbl_user (u_fname, u_lname, u_mi, u_email, u_age, u_addr, u_pob, u_dob, u_contct, u_usern, u_passw) "
+               + "VALUES ('" + fname.getText() + "', '" + lname.getText() + "', '" + mi.getText() + "', '" + em.getText() + "', '"
+               + age.getText() + "', '" + address.getText() + "', '" + pob.getText() + "', '" + dob.getText() + "', '"+ cn.getText() + "', '" + user.getText() + "', '" + pass.getText() + "')"))
+                {
+            JOptionPane.showMessageDialog(null, "Register Successful!");
+            login ln= new login();
+            ln.setVisible(true);
+            this.dispose();
+            }else{
+            JOptionPane.showMessageDialog(null, "Register Unsuccessful!");
         }
+   
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
+    private void lnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameActionPerformed
+    }//GEN-LAST:event_lnameActionPerformed
 
     private void cnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnActionPerformed
         // TODO add your handling code here:
@@ -335,6 +350,10 @@ public class register extends javax.swing.JFrame {
     private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passActionPerformed
+
+    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fnameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,6 +396,7 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JTextField cn;
     private javax.swing.JTextField dob;
     private javax.swing.JTextField em;
+    private javax.swing.JTextField fname;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -397,7 +417,6 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField lname;
     private javax.swing.JTextField mi;
-    private javax.swing.JTextField name;
     private java.awt.Panel panel3;
     private java.awt.Panel panel4;
     private javax.swing.JPasswordField pass;
@@ -405,4 +424,5 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JTextField user;
     private javax.swing.JTextField user4;
     // End of variables declaration//GEN-END:variables
+
 }
