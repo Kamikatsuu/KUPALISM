@@ -5,8 +5,6 @@
  */
 package registration;
 
-import ADMIN.Admin;
-import ADMIN.AdminD;
 import config.dbConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,19 +20,49 @@ public class register extends javax.swing.JFrame {
     /**
      * Creates new form register
      */
+   
     public register() {
         initComponents();
     }
-public static boolean registration(String username, String password){
-       dbConnector connector = new dbConnector();
-       try{ 
-           String query = "SELECT * FROM tbl_user WHERE u_usern= '" + username + "'AND u_passw = '"+ password +"' ";
+    public static String username, email;
+        public boolean dupChecker(){
+            dbConnector connector = new dbConnector();
+            
+            try{
+                 String query = "SELECT * FROM tbl_user WHERE u_usern= '" + user.getText() + "'OR u_email = '"+ em.getText() +"'  ";
            ResultSet resultSet=connector.getData(query);
-           return resultSet.next();
-       }catch(SQLException ex){
-       return false;
-   }
-}
+           
+           if(resultSet.next()){
+               username = resultSet.getString("u_usern");
+               if (username.equals(user.getText()));{
+               JOptionPane.showMessageDialog(null, "Username is already Inused");
+               user.setText("");
+           }
+               email = resultSet.getString("u_email");
+                if (email.equals(em.getText()));{
+               JOptionPane.showMessageDialog(null, "email is already In used");
+                user.setText("");
+           }
+               return true;
+           }else{
+           return false;
+           }
+            
+            }catch(SQLException ex){
+            System.out.println(""+ex);
+            return false;
+            
+            
+            
+            }
+        
+        
+        
+        
+        
+        
+        
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -320,7 +348,19 @@ public static boolean registration(String username, String password){
     }//GEN-LAST:event_addressActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dbConnector dbc = new dbConnector();
+       
+        if(fname.getText().isEmpty() || lname.getText().isEmpty() || em.getText().isEmpty() 
+                || age.getText().isEmpty() || address.getText().isEmpty() || pob.getText().isEmpty() || dob.getText().isEmpty() 
+                || cn.getText().isEmpty() || user.getText().isEmpty() || pass.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Field should not be Empty");
+        }else if(pass.getText().length() < 8){
+             JOptionPane.showMessageDialog(null, "password should be 8 above");
+             pass.setText("");
+        }else if(dupChecker()){
+            System.out.println("Duplicate exist");
+        
+        }else {
+            dbConnector dbc = new dbConnector();
         if( dbc.insertData( "INSERT INTO tbl_user (u_fname, u_lname, u_mi, u_email, u_age, u_addr, u_pob, u_dob, u_contct, u_usern, u_passw) "
                + "VALUES ('" + fname.getText() + "', '" + lname.getText() + "', '" + mi.getText() + "', '" + em.getText() + "', '"
                + age.getText() + "', '" + address.getText() + "', '" + pob.getText() + "', '" + dob.getText() + "', '"+ cn.getText() + "', '" + user.getText() + "', '" + pass.getText() + "')"))
@@ -332,6 +372,9 @@ public static boolean registration(String username, String password){
             }else{
             JOptionPane.showMessageDialog(null, "Register Unsuccessful!");
         }
+        }
+
+        
    
     }//GEN-LAST:event_jButton1ActionPerformed
 
