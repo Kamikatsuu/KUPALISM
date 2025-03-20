@@ -103,7 +103,8 @@ public class register extends javax.swing.JFrame {
         pass = new javax.swing.JPasswordField();
         jLabel16 = new javax.swing.JLabel();
         fname = new javax.swing.JTextField();
-        user4 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -160,11 +161,11 @@ public class register extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 120, -1));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 120, -1));
 
         jLabel3.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 14)); // NOI18N
         jLabel3.setText("Register");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 11, -1, -1));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
         panel4.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -290,14 +291,19 @@ public class register extends javax.swing.JFrame {
         });
         jPanel3.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 100, -1));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 360, 450));
-
-        user4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                user4ActionPerformed(evt);
+        jLabel1.setFont(new java.awt.Font("Courier New", 1, 11)); // NOI18N
+        jLabel1.setText("BACK TO LOGIN");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
             }
         });
-        jPanel2.add(user4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, -1, 20));
+
+        jLabel17.setText("ALREADY HAVE AN ACCOUNT?");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 170, 20));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 360, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -318,10 +324,6 @@ public class register extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void user4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_user4ActionPerformed
 
     private void emActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emActionPerformed
         // TODO add your handling code here:
@@ -398,6 +400,12 @@ public class register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fnameActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        login lgn = new login();
+       lgn.setVisible(true);
+       this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -441,6 +449,7 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JTextField em;
     private javax.swing.JTextField fname;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -448,6 +457,7 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -465,7 +475,6 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JPasswordField pass;
     private javax.swing.JTextField pob;
     private javax.swing.JTextField user;
-    private javax.swing.JTextField user4;
     // End of variables declaration//GEN-END:variables
 
 }
